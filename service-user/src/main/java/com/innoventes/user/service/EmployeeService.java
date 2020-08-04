@@ -105,9 +105,9 @@ public class EmployeeService implements IEmployeeService{
 	public ResponseEntity<EmployeeEntity> getEmp(String name)
 			throws DataPersistenceOperationException, ResourceNotFoundException, InvalidServiceRequestException {
 		// TODO Auto-generated method stub
-		EmployeeEntity hrEntity =iEmployeeRepository.findByName(name);
-		if (hrEntity!=null) {
-			return new ResponseEntity<EmployeeEntity>(hrEntity, HttpStatus.OK);
+		EmployeeEntity entity =iEmployeeRepository.findByName(name);
+		if (entity!=null) {
+			return new ResponseEntity<EmployeeEntity>(entity, HttpStatus.OK);
 		}else {
 			throw new ResourceNotFoundException("Employee not Exists...");
 		}

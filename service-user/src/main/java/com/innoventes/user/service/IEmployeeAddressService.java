@@ -16,12 +16,14 @@ import com.innoventes.user.services.entity.EmployeeEntity;
 public interface IEmployeeAddressService {
 
 	
-	public ResponseEntity<Map<String, String>> saveAdd(EmployeeAddressEntity userDataModel ) throws DataPersistenceOperationException,Exception,InvalidServiceRequestException,ResourceNotFoundException;
+	public ResponseEntity<Map<String, String>> saveAdd(EmployeeAddressDataModel userDataModel ) throws DataPersistenceOperationException,Exception,InvalidServiceRequestException,ResourceNotFoundException;
 
 	public Page<EmployeeAddressEntity> getAllEmpAdd() throws DataPersistenceOperationException,Exception,InvalidServiceRequestException,ResourceNotFoundException;
 
-	public ResponseEntity<EmployeeAddressEntity> getEmpAdd(String eId) throws DataPersistenceOperationException,Exception,InvalidServiceRequestException,ResourceNotFoundException;
+	public ResponseEntity<EmployeeAddressEntity> getEmpAdd(long eId) throws DataPersistenceOperationException,Exception,InvalidServiceRequestException,ResourceNotFoundException;
 
 	public ResponseEntity<Map<String, String>> updateEmpAdd(EmployeeDataModel userDataModel) throws DataPersistenceOperationException,ResourceNotFoundException,InvalidServiceRequestException;
+
+	public ResponseEntity<Map<String, String>> saveEmAd(EmployeeAddressEntity requestBody)  throws DataPersistenceOperationException,ResourceNotFoundException,InvalidServiceRequestException;
 
 }

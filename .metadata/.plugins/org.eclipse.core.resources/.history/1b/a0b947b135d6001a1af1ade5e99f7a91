@@ -60,8 +60,8 @@ public class EmployeeAddressController extends ServiceRequestProcessor{
 	 * post employeeAddress create controller
 	 * 
 	 */
-	@RequestMapping(value = "/d", method = RequestMethod.POST)
-	public String addEmp(@RequestBody String requestBody, HttpServletRequest httpServletRequest,
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	public String addEmp(@RequestBody EmployeeAddressDataModel requestBody, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws  DataPersistenceOperationException,Exception,InvalidServiceRequestException,ResourceNotFoundException {
 		LOG.info("entered job notes creation - start");
 		EmployeeAddressDataModel employeeAddressDataModel = null;
@@ -72,22 +72,6 @@ public class EmployeeAddressController extends ServiceRequestProcessor{
 		employeeAddressDataModel = (EmployeeAddressDataModel)JSONConverter.convertStringToPOJO(requestBody, EmployeeAddressDataModel.class);
 		
 		ResponseEntity<Map<String, String>> response = iEmployeeAddressService.saveAdd(employeeAddressDataModel);
-		LOG.info("successfully created  operation ");
-		return JSONConverter.convertPOJOToString(response);
-
-	}
-	
-	/**
-	 * post employeeAddress create controller
-	 * 
-	 */
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addEmpAdd(@RequestBody EmployeeAddressEntity requestBody, HttpServletRequest httpServletRequest,
-			HttpServletResponse httpServletResponse) throws  DataPersistenceOperationException,Exception,InvalidServiceRequestException,ResourceNotFoundException {
-		LOG.info("entered job notes creation - start");
-		EmployeeAddressDataModel employeeAddressDataModel = null;
-		
-		ResponseEntity<Map<String, String>> response = iEmployeeAddressService.saveEmAd(requestBody);
 		LOG.info("successfully created  operation ");
 		return JSONConverter.convertPOJOToString(response);
 
@@ -112,9 +96,9 @@ public class EmployeeAddressController extends ServiceRequestProcessor{
 	 * 
 	 */
 	@RequestMapping(value = "/Em_get", method = RequestMethod.GET)
-	public String getHr(@RequestParam("id") long id,HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) throws DataPersistenceOperationException,Exception,InvalidServiceRequestException,ResourceNotFoundException{
+	public String getHr(@RequestParam("eId") String eId,HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) throws DataPersistenceOperationException,Exception,InvalidServiceRequestException,ResourceNotFoundException{
 		LOG.info("entered employee notes fetch - start");
-		return JSONConverter.convertPOJOToString(iEmployeeAddressService.getEmpAdd(id));
+		return JSONConverter.convertPOJOToString(iEmployeeAddressService.getEmpAdd(eId));
 	}
 	
 	

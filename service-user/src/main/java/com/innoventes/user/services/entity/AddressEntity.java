@@ -39,7 +39,7 @@ public class AddressEntity {
 	private String city;
 	
 	
-	@OneToMany(mappedBy = "address", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "address", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Set<EmployeeAddressEntity> employeeAddress = new HashSet<>();
 
 	public long getId() {

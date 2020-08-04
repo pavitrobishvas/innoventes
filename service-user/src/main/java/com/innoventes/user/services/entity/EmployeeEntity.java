@@ -27,12 +27,14 @@ public class EmployeeEntity {
 	private String dateOfBirth;
 
 	
-	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Set<EmployeeAddressEntity> employeeAddress;
 	
 	
 	
-//	public EmployeeEntity( EmployeeAddressEntity... employeeAddress) {
+//	public EmployeeEntity(EmployeeAddressEntity... employeeAddress) {
+//		this.name = name;
+//		this.dateOfBirth = dateOfBirth;
 //        for(EmployeeAddressEntity employee : employeeAddress) employee.setEmployee(this);
 //        this.employeeAddress = Stream.of(employeeAddress).collect(Collectors.toSet());
 //    }

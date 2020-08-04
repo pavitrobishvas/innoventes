@@ -15,5 +15,5 @@ public interface IEmployeeAddressRepository extends JpaRepository<EmployeeAddres
 //	EmployeeAddressEntity findByName(String eId);
 	
 	@Query("SELECT t FROM EmployeeAddressEntity t WHERE t.id = ?1")
-	EmployeeAddressEntity findByById(long id);
+	EmployeeAddressEntity findById(long id);
 }

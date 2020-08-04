@@ -80,24 +80,18 @@ public class EmployeeAddressService implements IEmployeeAddressService {
 	}	
 	
 	@Override
-	public ResponseEntity<Map<String, String>> saveAdd(EmployeeAddressEntity employeeAddressEntity)
+	public ResponseEntity<Map<String, String>> saveAdd(EmployeeAddressDataModel employeeAddressDataModel)
 			throws DataPersistenceOperationException, InvalidServiceRequestException {
 		// TODO Auto-generated method stub
-		LOG.info("HERE"+employeeAddressEntity);
+		LOG.info("HERE"+employeeAddressDataModel);
 		//EmployeeAddressEntity employeeAddressEntity = new EmployeeAddressEntity();
 		EmployeeAddressEntity employeeEntity = new EmployeeAddressEntity();
 		Map<String,String> response = new HashMap<String, String>();
         //validation employee and address field		
-		//validation.validate(employeeAddressDataModel);
+		//validation.validate(e);
 		//Object converstion
 		
-		//iEmRepository.save(new EmployeeEntity(employeeAddressEntity));
-	
-		System.out.println("body"+employeeAddressEntity.getAddress().getCity());
-		employeeEntity.setAddress(employeeAddressEntity.getAddress());
-		employeeEntity.setEmployee(employeeAddressEntity.getEmployee());
-		
-
+		BeanUtils.copyProperties(employeeAddressDataModel, employeeEntity);
 		iEmployeeRepository.save(employeeEntity);
 		//BeanUtils.copyProperties(employeeAddressDataModel, employeeEntity);
 		response.put("message", "EmployeeAddress Added successfully");
@@ -122,16 +116,16 @@ public class EmployeeAddressService implements IEmployeeAddressService {
 	 */
 
 	@Override
-	public ResponseEntity<EmployeeAddressEntity> getEmpAdd(String name)
+	public ResponseEntity<EmployeeAddressEntity> getEmpAdd(long id)
 			throws DataPersistenceOperationException, ResourceNotFoundException, InvalidServiceRequestException {
 		// TODO Auto-generated method stub
-		//EmployeeAddressEntity hrEntity =iEmployeeRepository.findByName(name);
-//		if (hrEntity!=null) {
-//			return new ResponseEntity<EmployeeAddressEntity>(hrEntity, HttpStatus.OK);
-//		}else {
-//			throw new ResourceNotFoundException("Employee not Exists...");
-//		}
-		return null;
+		EmployeeAddressEntity hrEntity =iEmployeeRepository.findById(id);
+		if (hrEntity!=null) {
+			return new ResponseEntity<EmployeeAddressEntity>(hrEntity, HttpStatus.OK);
+		}else {
+			throw new ResourceNotFoundException("Employee  not Exists...");
+		}
+		
 	}
 	
 	/**
@@ -144,16 +138,38 @@ public class EmployeeAddressService implements IEmployeeAddressService {
 			throws DataPersistenceOperationException,ResourceNotFoundException, InvalidServiceRequestException {
 		// TODO Auto-generated method stub
 		Map<String,String> response = new HashMap<String, String>();
-		EmployeeAddressEntity hrEntity = iEmployeeRepository.findByById(userDataModel.getId());
-		if (hrEntity!=null) {
-			BeanUtils.copyProperties(userDataModel, hrEntity);
-			LOG.info("response"+hrEntity);
-			iEmployeeRepository.save(hrEntity);
-			response.put("message", "Employee Address Update successfully");
-		}else {
-			throw new ResourceNotFoundException("Employee Address not Exists!!");
-		}
+//		EmployeeAddressEntity hrEntity = iEmployeeRepository.findByById(userDataModel.getId());
+//		if (hrEntity!=null) {
+//			BeanUtils.copyProperties(userDataModel, hrEntity);
+//			LOG.info("response"+hrEntity);
+//			iEmployeeRepository.save(hrEntity);
+//			response.put("message", "Employee Address Update successfully");
+//		}else {
+//			throw new ResourceNotFoundException("Employee Address not Exists!!");
+//		}
 		return  ResponseEntity.ok().body(response);
+	}
+
+	@Override
+	public ResponseEntity<Map<String, String>> saveEmAd(EmployeeAddressEntity requestBody)
+			throws DataPersistenceOperationException, ResourceNotFoundException, InvalidServiceRequestException {
+		// TODO Auto-generated method stub
+		LOG.info("HERE"+requestBody);
+		//EmployeeAddressEntity employeeAddressEntity = new EmployeeAddressEntity();
+		EmployeeAddressEntity employeeEntity = new EmployeeAddressEntity();
+		Map<String,String> response = new HashMap<String, String>();
+        //validation employee and address field		
+		//validation.validate(e);
+		//Object converstion
+		
+		//BeanUtils.copyProperties(employeeAddressDataModel, employeeEntity);
+		iEmployeeRepository.save(requestBody);
+		//BeanUtils.copyProperties(employeeAddressDataModel, employeeEntity);
+		response.put("message", "EmployeeAddress Added successfully");
+		
+		
+		return  ResponseEntity.ok().body(response);
+
 	}
 
 

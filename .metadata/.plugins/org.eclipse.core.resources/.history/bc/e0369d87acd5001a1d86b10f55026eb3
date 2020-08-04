@@ -1,5 +1,0 @@
-package com.innoventes.user.services.entity;
-
-public class EmployeeAddressEntity {
-
-}

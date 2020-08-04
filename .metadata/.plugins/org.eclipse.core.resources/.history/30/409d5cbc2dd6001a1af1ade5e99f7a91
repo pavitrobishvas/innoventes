@@ -1,7 +1,7 @@
 package com.innoventes.user.services.entity;
 
 import java.io.Serializable;
-import lombok.*;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,38 +14,29 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-@Getter
-@Setter
-@NoArgsConstructor
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "employeeAddress")
 public class EmployeeAddressEntity implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private long id;
 
-	@ManyToOne(cascade = { CascadeType.MERGE },fetch = FetchType.EAGER)
-	@JoinColumn(name = "employee_id", referencedColumnName = "id")
-	private EmployeeEntity employee;
+	@Id
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "employee_id",referencedColumnName = "id")
+    private EmployeeEntity employee;
 
-	@ManyToOne(cascade = { CascadeType.MERGE },fetch = FetchType.EAGER)
-	@JoinColumn(name = "address_id", referencedColumnName = "id")
-	private AddressEntity address;
-
-//	@ManyToMany(fetch = FetchType.EAGER)
-//	@JoinTable(name = "employee_address_relation", joinColumns = {
-//			@JoinColumn(name = "employeeAddress_id", referencedColumnName = "id") }, inverseJoinColumns = {
-//					@JoinColumn(name = "employee_id", referencedColumnName = "id") })
-
+	@Id
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private AddressEntity address;
+    
+    
+    
 	@Column(name = "addressType")
 	private String addressType;
 
@@ -80,5 +71,5 @@ public class EmployeeAddressEntity implements Serializable {
 	public void setAddress(AddressEntity address) {
 		this.address = address;
 	}
-
+	
 }
